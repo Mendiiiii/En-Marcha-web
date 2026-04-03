@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>En Marcha | Impulsamos el campo. Diseñamos futuro.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bosque': '#2D472C',
+                        'oliva': '#637A3D',
+                        'ocre': '#E9A24B',
+                        'tierra': '#6F5E53',
+                        'arena': '#DDCDB8',
+                    },
+                    fontFamily: {
+                        'serif': ['DM Serif Display', 'serif'],
+                        'sans': ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --bosque: #2D472C;
+            --oliva: #637A3D;
+            --ocre: #E9A24B;
+            --tierra: #6F5E53;
+            --arena: #DDCDB8;
+            --white: #FFFFFF;
+        }
+
+        * {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .hero-pattern {
+            background-image:
+                radial-gradient(circle at 20% 80%, rgba(99, 122, 61, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(233, 162, 75, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(45, 71, 44, 0.03) 0%, transparent 70%);
+        }
+
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.015;
+            z-index: 1000;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .stagger-1 {
+            transition-delay: 0.1s;
+        }
+
+        .stagger-2 {
+            transition-delay: 0.2s;
+        }
+
+        .stagger-3 {
+            transition-delay: 0.3s;
+        }
+
+        .stagger-4 {
+            transition-delay: 0.4s;
+        }
+
+        .stagger-5 {
+            transition-delay: 0.5s;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .reveal,
+            .reveal-left,
+            .reveal-right {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
+        .btn-primary {
+            background-color: var(--ocre);
+            color: var(--bosque);
+            border-radius: 10px;
+            padding: 14px 28px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            background-color: #d4943e;
+            box-shadow: 0 8px 24px rgba(233, 162, 75, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:focus-visible {
+            outline: 3px solid var(--oliva);
+            outline-offset: 2px;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--bosque);
+            color: var(--bosque);
+            border-radius: 10px;
+            padding: 10px 24px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--bosque);
+            color: white;
+        }
+
+        .value-card {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(45, 71, 44, 0.12);
+        }
+
+        .value-card .icon-container {
+            transition: transform 0.4s ease;
+        }
+
+        .value-card:hover .icon-container {
+            transform: scale(1.05);
+        }
+
+        .img-parallax {
+            transition: transform 0.6s ease-out;
+        }
+
+        .img-parallax:hover {
+            transform: scale(1.02);
+        }
+
+        .animated-line {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .animated-line::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--oliva), var(--ocre));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s ease;
+        }
+
+        .animated-line:hover::after {
+            transform: scaleX(1);
+        }
+
+        .header-scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        .value-bullet {
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .value-bullet::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 8px;
+            height: 8px;
+            background-color: var(--oliva);
+            border-radius: 2px;
+            transform: rotate(45deg);
+        }
+
+        .deco-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.5;
+            filter: blur(60px);
+            pointer-events: none;
+        }
+
+        .team-card {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 32px rgba(45, 71, 44, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-white text-bosque antialiased">
+    <div class="grain-overlay"></div>
+
+    <!-- HEADER -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <nav class="flex items-center justify-between h-20">
+
+
+                <a href="#" class="flex items-center gap-3 group" aria-label="En Marcha - Inicio">
+                    <img src="assests/img/En marcha logo copy.png" alt="Logo En Marcha" class="h-20 w auto">
+                    <span class="font-serif text-2xl text-bosque">En Marcha</span>
+                </a>
+
+
+
+
+                <div class="hidden lg:flex items-center gap-8">
+                    <a href="#inicio"
+                        class="text-bosque font-medium hover:text-oliva transition-colors animated-line py-2">Inicio</a>
+                    <a href="#proyectos"
+                        class="text-bosque font-medium hover:text-oliva transition-colors animated-line py-2">Proyectos</a>
+                    <a href="#innovacion"
+                        class="text-bosque font-medium hover:text-oliva transition-colors animated-line py-2">Innovacion</a>
+                    <a href="#nosotros"
+                        class="text-bosque font-medium hover:text-oliva transition-colors animated-line py-2">Nosotros</a>
+                    <a href="#contacto"
+                        class="text-bosque font-medium hover:text-oliva transition-colors animated-line py-2">Contacto</a>
+                </div>
+
+                <div class="hidden lg:block">
+                    <button class="btn-outline">????</button>
+                </div>
+
+                <button id="menuToggle"
+                    class="lg:hidden p-2 text-bosque focus:outline-none focus-visible:ring-2 focus-visible:ring-ocre rounded-lg"
+                    aria-label="Abrir menu" aria-expanded="false">
+                    <svg class="w-6 h-6 menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <svg class="w-6 h-6 close-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </nav>
+        </div>
+
+        <div id="mobileMenu" class="mobile-menu fixed inset-y-0 right-0 w-full max-w-sm bg-white shadow-2xl lg:hidden">
+            <div class="flex flex-col h-full pt-24 pb-8 px-8">
+                <nav class="flex flex-col gap-6">
+                    <a href="#inicio"
+                        class="text-xl font-medium text-bosque hover:text-oliva transition-colors">Inicio</a>
+                    <a href="#proyectos"
+                        class="text-xl font-medium text-bosque hover:text-oliva transition-colors">Proyectos</a>
+                    <a href="#innovacion"
+                        class="text-xl font-medium text-bosque hover:text-oliva transition-colors">Innovacion</a>
+                    <a href="#nosotros"
+                        class="text-xl font-medium text-bosque hover:text-oliva transition-colors">Nosotros</a>
+                    <a href="#contacto"
+                        class="text-xl font-medium text-bosque hover:text-oliva transition-colors">Contacto</a>
+                </nav>
+                <div class="mt-auto">
+                    <button class="btn-outline w-full">Conecta con nosotros</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section id="inicio" class="hero-pattern relative min-h-screen flex items-center pt-20">
+            <div class="deco-shape w-96 h-96 bg-oliva top-20 -left-48" style="opacity: 0.08;"></div>
+            <div class="deco-shape w-64 h-64 bg-ocre bottom-20 right-10" style="opacity: 0.06;"></div>
+
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div class="order-2 lg:order-1">
+                        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-6xl text-bosque leading-tight reveal visible"
+                            style="animation: fadeUp 0.8s ease-out forwards;">
+                            Impulsamos el campo.
+                            <br> Diseñamos futuro.
+
+                        </h1>
+                        <div class="mt-8 text-lg lg:text-xl text-tierra leading-relaxed max-w-xl reveal visible stagger-1"
+                            style="animation: fadeUp 0.8s ease-out 0.2s forwards; opacity: 0;">
+                            <p class="mb-4">En Marcha es un laboratorio rural de ideas en acción.</p>
+                            <p class="mb-4">Nacemos para probar, diseñar y poner en marcha proyectos que conectan
+                                territorio, emprendimiento y transición digital.</p>
+                            <p class="mb-4">Trabajamos desde el campo y para el campo. Con personas que quieren crear,
+                                transformar o volver. Con organizaciones que buscan hacer las cosas de otra manera.</p>
+                            <p class="mb-4">No acompañamos procesos: los activamos. Lanzamos formación útil,
+                                prototipamos soluciones reales y abrimos oportunidades donde antes solo había distancia.
+                            </p>
+                            <p class="font-medium text-bosque">Nuestro objetivo es claro: más empleo local, más
+                                emprendimiento con sentido y menos brechas digitales, sociales y territoriales.</p>
+                        </div>
+                        <div class="mt-10 reveal visible stagger-2"
+                            style="animation: fadeUp 0.8s ease-out 0.4s forwards; opacity: 0;">
+                            <a href="#contacto" class="btn-primary text-lg">
+                                Colabora con En Marcha
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="order-1 lg:order-2 reveal visible"
+                        style="animation: scaleIn 1s ease-out 0.3s forwards; opacity: 0;">
+                        <div class="relative">
+                            <div
+                                class="absolute -inset-4 bg-gradient-to-br from-oliva/20 to-ocre/20 rounded-3xl blur-2xl">
+                            </div>
+                            <div class="relative overflow-hidden rounded-2xl shadow-2xl">
+                                <img src="assests/img/hero en marcha.jpeg" alt="Campo abierto al amanecer"
+                                    class="w-full h-80 lg:h-[500px] object-cover img-parallax" loading="eager">
+                                <div class="absolute inset-0 bg-gradient-to-t from-bosque/30 to-transparent"></div>
+                            </div>
+                            <div
+                                class="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-xl p-4 flex items-center gap-3">
+                                <div class="w-12 h-12 bg-ocre/20 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-ocre" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-bosque">Laboratorio rural</p>
+                                    <p class="font-semibold text-bosque">de ideas en acción</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2 text-tierra/60">
+                <span class="text-sm">Descubre más</span>
+                <div class="w-6 h-10 border-2 border-tierra/30 rounded-full flex justify-center pt-2">
+                    <div class="w-1.5 h-3 bg-ocre rounded-full animate-bounce"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VALOR AÑADIDO -->
+        <section class="py-20 lg:py-28 bg-white relative">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="text-center mb-16 reveal">
+                    <p class="text-oliva font-semibold tracking-wide uppercase text-sm mb-4">Nuestro enfoque</p>
+                    <h2 class="font-serif text-3xl lg:text-4xl xl:text-5xl text-bosque">Lo que podemos poner En Marcha
+                        juntos</h2>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 lg:gap-12">
+                    <!-- Card 1 -->
+                    <article
+                        class="value-card bg-white rounded-2xl p-8 shadow-lg shadow-bosque/5 border border-arena/50 reveal stagger-1">
+                        <div
+                            class="icon-container w-16 h-16 bg-gradient-to-br from-bosque to-oliva rounded-xl flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-serif text-xl lg:text-2xl text-bosque mb-4">Transformación digital inclusiva
+                        </h3>
+                        <p class="text-tierra leading-relaxed mb-4">No hablamos de digitalizar por digitalizar.
+                            Trabajamos para que más personas puedan usar lo digital como herramienta real de autonomía y
+                            trabajo.</p>
+                        <p class="text-tierra leading-relaxed mb-4">Formamos en competencias prácticas. Convertimos
+                            ideas en proyectos concretos. Creamos espacios donde experimentar sin miedo.</p>
+                        <p class="font-medium text-bosque">La innovación no es un discurso. Es un hábito.</p>
+                    </article>
+
+                    <!-- Card 2 -->
+                    <article
+                        class="value-card bg-white rounded-2xl p-8 shadow-lg shadow-bosque/5 border border-arena/50 reveal stagger-2">
+                        <div
+                            class="icon-container w-16 h-16 bg-gradient-to-br from-ocre to-ocre/80 rounded-xl flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                        <h3 class="font-serif text-xl lg:text-2xl text-bosque mb-4">Emprendimiento e innovación social
+                        </h3>
+                        <p class="text-tierra leading-relaxed mb-4">Las buenas ideas no necesitan épica, necesitan
+                            estructura.</p>
+                        <p class="text-tierra leading-relaxed mb-4">Te ayudamos a ordenar, testear y aterrizar ese
+                            proyecto que llevas tiempo dándole vueltas. Prototipamos contigo. Ajustamos. Volvemos a
+                            probar.</p>
+                        <p class="text-tierra leading-relaxed mb-4">Buscamos modelos viables, sostenibles y conectados
+                            al territorio.</p>
+                        <p class="font-medium text-bosque">Sin humo. Con números y con impacto real.</p>
+                    </article>
+
+                    <!-- Card 3 -->
+                    <article
+                        class="value-card bg-white rounded-2xl p-8 shadow-lg shadow-bosque/5 border border-arena/50 reveal stagger-3">
+                        <div
+                            class="icon-container w-16 h-16 bg-gradient-to-br from-oliva to-bosque rounded-xl flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-serif text-xl lg:text-2xl text-bosque mb-4">Empleabilidad y competencias para el
+                            futuro</h3>
+                        <p class="text-tierra leading-relaxed mb-4">El empleo no se mejora sólo con cursos. Se mejora
+                            cuando el territorio entiende qué necesita y construye capacidades colectivas.</p>
+                        <p class="text-tierra leading-relaxed mb-4">En Marcha trabaja con Ayuntamientos, asociaciones y
+                            entidades sociales para diseñar itinerarios de empleabilidad adaptados a colectivos
+                            concretos: jovenes rurales, mujeres, personas en transición profesional o comunidades con
+                            brecha digital.</p>
+                        <p class="font-medium text-bosque">Diseñamos formación práctica conectada al mercado.</p>
+
+                    </article>
+                </div>
+
+                <div class="mt-12 bg-arena/30 rounded-2xl p-8 lg:p-10 reveal stagger-4">
+                    <p class="text-tierra leading-relaxed mb-4">No hacemos formación genérica. Creamos programas que
+                        responden a desafíos concretos y activan talento local.</p>
+                    <p class="font-medium text-bosque text-lg">Porque fortalecer la empleabilidad no es sólo mejorar
+                        curriculums. Es fortalecer comunidades.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- BANNER DE TRANSICIÓN -->
+        <section class="py-16 lg:py-20 bg-arena relative overflow-hidden">
+            <div class="absolute inset-0 opacity-30">
+                <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                        <circle cx="1" cy="1" r="0.5" fill="#637A3D" opacity="0.3" />
+                    </pattern>
+                    <rect width="100%" height="100%" fill="url(#grid)" />
+                </svg>
+            </div>
+
+            <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10 reveal">
+                <h2 class="font-serif text-2xl lg:text-3xl xl:text-4xl text-bosque mb-6">
+                    ¿Tienes un reto sobre la mesa?
+                </h2>
+                <p class="text-tierra text-lg mb-4 max-w-7xl mx-auto">
+                    Cada territorio tiene desafíos propios.
+                    <br>Lo importante no es tener grandes planes, sino empezar con
+                    el experimento adecuado.
+                </p>
+                <p class="text-tierra text-lg mb-8 max-w-2xl mx-auto">
+                    Cuéntanos el contexto. Analizamos contigo el escenario y definimos
+                    <br> el primer paso viable.
+                </p>
+                <a href="#contacto" class="btn-primary text-lg inline-flex">
+                    Diseñémoslo
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- PROYECTOS -->
+        <section id="proyectos" class="py-20 lg:py-28 bg-white">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                    <div class="reveal-left">
+                        <div class="relative overflow-hidden rounded-2xl shadow-xl">
+                            <img src=assests/img/proyectos.jpg alt="Programas de formacion y empleabilidad"
+                                class="w-full h-72 lg:h-[450px] object-cover img-parallax" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-r from-bosque/20 to-transparent"></div>
+                        </div>
+                        <div
+                            class="absolute -bottom-4 right-8 lg:right-12 bg-oliva text-white px-6 py-3 rounded-lg shadow-lg">
+                            <span class="font-semibold">Programas activos</span>
+                        </div>
+                    </div>
+
+                    <div class="reveal-right">
+                        <p class="text-ocre font-semibold tracking-wide uppercase text-sm mb-4">Proyectos</p>
+                        <h2 class="font-serif text-3xl lg:text-4xl xl:text-5xl text-bosque mb-6">
+                            Programas que se diseñan, se prueban y se
+                            <br> implementan.
+                        </h2>
+                        <p class="text-tierra text-lg leading-relaxed mb-6">
+                            En Marcha desarrolla programas de formación y empleabilidad conectados con el territorio y
+                            alineados con estándares internacionales.
+                        </p>
+                        <p class="text-tierra text-lg leading-relaxed mb-6">
+                            Diseñamos itinerarios formativos a medida, acompañamos a organizaciones en procesos de
+                            activación económica y lanzamos proyectos piloto de innovación social que luego pueden
+                            escalar.
+                        </p>
+                        <p class="text-tierra text-lg leading-relaxed mb-6">
+                            Nuestro enfoque combina experiencia local y trayectoria internacional. El equipo impulsor ha
+                            trabajado durante más de una decada con organismos como la Organizacion Internacional del
+                            Trabajo (OIT), diseñando programas de emprendimiento, formalización y empleabilidad en
+                            distintos paises.
+                        </p>
+                        <p class="text-tierra text-lg leading-relaxed mb-6">
+                            Esa experiencia nos permite traer metodologias sólidas y adaptarlas a realidades rurales
+                            concretas.
+                        </p>
+                        <p class="font-medium text-bosque text-lg">No copiamos modelos. Los contextualizamos. Los
+                            testeamos y los ponemos en Marcha.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INNOVACIÓN -->
+        <section id="innovacion" class="py-20 lg:py-28 bg-gradient-to-b from-arena/30 to-white">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                    <div class="order-2 lg:order-1 reveal-left">
+                        <p class="text-ocre font-semibold tracking-wide uppercase text-sm mb-4">Innovación</p>
+                        <h2 class="font-serif text-3xl lg:text-4xl xl:text-5xl text-bosque mb-6">
+                            Laboratorio de innovación social territorial
+                        </h2>
+                        <p class="text-tierra text-lg leading-relaxed mb-6">
+                            En Marcha funciona como un laboratorio de experimentación aplicada.
+                        </p>
+                        <p class="text-tierra text-lg leading-relaxed mb-6">
+                            Trabajamos sobre retos reales del territorio — empleo, digitalización, emprendimiento rural
+                            — y los abordamos con metodología, diseño y prototipado.
+                        </p>
+                        <p class="text-tierra text-lg leading-relaxed mb-6">
+                            No hacemos diagnósticos eternos. Diseñamos soluciones pequeñas, las testeamos y medimos que
+                            funciona.
+                        </p>
+                        <p class="text-tierra text-lg leading-relaxed mb-6">
+                            El laboratorio combina experiencia en programas internacionales de innovación y empleo —
+                            desarrollados en colaboración con organismos como la OIT — con enfoque de diseño centrado en
+                            las personas y experiencia de usuario.
+                        </p>
+                        <p class="font-medium text-bosque text-lg">Estrategia + UX + territorio.</p>
+                    </div>
+
+                    <div class="order-1 lg:order-2 reveal-right">
+                        <div class="relative overflow-hidden rounded-2xl shadow-xl">
+                            <img src="assests/img/innovacion en Marrcha landing.jpg"
+                                alt="Laboratorio de innovacion social"
+                                class="w-full h-72 lg:h-[450px] object-cover img-parallax" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-l from-ocre/20 to-transparent"></div>
+                        </div>
+                        <div
+                            class="absolute -bottom-4 left-8 lg:left-12 bg-ocre text-bosque px-6 py-3 rounded-lg shadow-lg">
+                            <span class="font-semibold">Laboratorio vivo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUIÉNES SOMOS -->
+        <section id="nosotros" class="py-20 lg:py-28 bg-white relative overflow-hidden">
+            <div class="deco-shape w-80 h-80 bg-oliva -top-40 -right-40" style="opacity: 0.05;"></div>
+            <div class="deco-shape w-64 h-64 bg-ocre -bottom-32 -left-32" style="opacity: 0.04;"></div>
+
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+                <div class="max-w-3xl mx-auto text-center mb-20 reveal">
+                    <p class="text-oliva font-semibold tracking-wide uppercase text-sm mb-4">Quiénes somos</p>
+                    <h2 class="font-serif text-3xl lg:text-4xl xl:text-5xl text-bosque mb-8">
+                        Un laboratorio en movimiento.
+                    </h2>
+                    <p class="text-tierra text-lg leading-relaxed mb-6">
+                        En Marcha nace de la combinacion de dos miradas: estrategia e implementacion por un lado, diseño
+                        y experiencia de usuario por otro.
+                    </p>
+                    <p class="text-tierra text-lg leading-relaxed mb-6">
+                        Somos una asociación sin animo de lucro, pero sobre todo somos un espacio de trabajo donde
+                        las ideas se contrastan, se prototipan y se convierten en proyectos reales.
+                    </p>
+                    <p class="text-tierra text-lg leading-relaxed mb-6">
+                        Trabajamos en la intersección entre territorio, empleo y transformación digital. Conectamos
+                        personas, organizaciones e instituciones que quieren hacer cosas concretas y no solo hablar de
+                        ellas.
+                    </p>
+                    <p class="text-tierra text-lg leading-relaxed mb-6">
+                        Nuestra experiencia combina años diseñando e implementando programas de empleabilidad,
+                        emprendimiento e innovación en distintos paises, con metodología de diseño centrado en las
+                        personas y cultura de prototipado.
+                    </p>
+                    <p class="font-medium text-bosque text-lg">Creemos en algo simple: los territorios no cambian con
+                        planes estratégicos infinitos. Cambian cuando alguien empieza a probar. Y nosotros damos el
+                        paso.
+                    </p>
+                </div>
+
+                <!-- MISIÓN -->
+                <div class="bg-gradient-to-br from-bosque to-oliva rounded-3xl p-10 lg:p-14 mb-20 reveal">
+                    <div class="flex items-start gap-6">
+                        <div
+                            class="hidden sm:block w-16 h-16 bg-white/20 rounded-xl flex-shrink-0 flex items-center justify-center">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-2xl lg:text-3xl text-white mb-4">Nuestra misión</h3>
+                            <p class="text-white/90 text-lg leading-relaxed mb-4">Activar talento y oportunidades donde
+                                más se necesitan.</p>
+                            <p class="text-white/90 text-lg leading-relaxed mb-4">Diseñamos y ponemos en marcha
+                                programas que mejoran el empleo y abren nuevas posibilidades económicas desde el
+                                territorio.</p>
+                            <p class="text-white/90 text-lg leading-relaxed mb-4">Trabajamos con formación practica,
+                                prototipado y cooperación estratégica para desarrollar competencias que respondan al
+                                presente y se anticipen el futuro.</p>
+                            <p class="text-white/90 text-lg leading-relaxed mb-4">No creemos en soluciones estándar.
+                                Creemos en modelos más justos, más sostenibles y más conectados con la realidad local.
+                            </p>
+                            <p class="text-white font-medium text-lg">Nuestra misión no es acompañar el cambio. Es
+                                iniciarlo.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VALORES -->
+                <div class="reveal mb-20">
+                    <h3 class="font-serif text-2xl lg:text-3xl text-bosque text-center mb-10">Lo que guía cómo
+                        trabajamos</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-arena/50 rounded-xl p-6 reveal stagger-1">
+                            <h4 class="font-semibold text-bosque text-lg mb-3">Aprendizaje continuo</h4>
+                            <p class="text-tierra">El mercado cambia. La tecnología cambia. Los territorios cambian.
+                                Creemos en la formación como proceso constante, práctico y conectado a la realidad.</p>
+                        </div>
+                        <div class="bg-arena/50 rounded-xl p-6 reveal stagger-2">
+                            <h4 class="font-semibold text-bosque text-lg mb-3">Inclusión real, no retórica</h4>
+                            <p class="text-tierra">La innovación solo tiene sentido si amplía oportunidades. Trabajamos
+                                para reducir brechas — digitales, económicas y territoriales — con programas diseñados
+                                para quienes suelen quedar fuera.</p>
+                        </div>
+                        <div class="bg-arena/50 rounded-xl p-6 reveal stagger-3">
+                            <h4 class="font-semibold text-bosque text-lg mb-3">Innovación con metodo</h4>
+                            <p class="text-tierra">No confundimos innovación con ideas sueltas. Aplicamos diseño,
+                                prototipado y evaluación para que las soluciones funcionen en la práctica.</p>
+                        </div>
+                        <div class="bg-arena/50 rounded-xl p-6 reveal stagger-4">
+                            <h4 class="font-semibold text-bosque text-lg mb-3">Cooperación inteligente</h4>
+                            <p class="text-tierra">Los retos complejos no se resuelven solos. Conectamos instituciones,
+                                organizaciones y talento local para generar impacto colectivo.</p>
+                        </div>
+                        <div class="bg-arena/50 rounded-xl p-6 md:col-span-2 lg:col-span-2 reveal stagger-5">
+                            <h4 class="font-semibold text-bosque text-lg mb-3">Sostenibilidad con los pies en la tierra
+                            </h4>
+                            <p class="text-tierra">Promovemos modelos económicos viables, responsables y arraigados al
+                                territorio. Lo sostenible debe poder mantenerse en el tiempo.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EQUIPO -->
+                <div class="reveal">
+                    <p class="text-oliva font-semibold tracking-wide uppercase text-sm mb-4 text-center">Equipo impulsor
+                    </p>
+                    <h3 class="font-serif text-2xl lg:text-3xl text-bosque text-center mb-12">Las personas detras de En
+                        Marcha</h3>
+
+                    <div class="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
+                        <!-- Miguel Gatóo -->
+                        <div
+                            class="team-card bg-white rounded-2xl shadow-lg shadow-bosque/5 border border-arena/50 overflow-hidden reveal stagger-1">
+                            <div class="h-48 bg-gradient-to-br from-bosque to-oliva relative">
+                                <img src="assests/img/Foto Gatoo.PNG" alt="Miguel Gato"
+                                    class="w-full h-full object-cover mix-blend-luminosity opacity-60">
+                                <div class="absolute bottom-4 left-6 right-6">
+                                    <h4 class="font-serif text-xl text-white">Miguel Gatoó</h4>
+                                    <p class="text-white/80 text-sm">Estrategia, empleo e innovacion aplicada</p>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <p class="text-tierra leading-relaxed mb-4">Despues de recorrer medio mundo en bicicleta
+                                    y lanzar varios negocios propios, entendió algo esencial: las ideas solo funcionan
+                                    cuando pisan tierra.</p>
+                                <p class="text-tierra leading-relaxed mb-4">Su trayectoria le llevo a trabajar en
+                                    programas internacionales de empleo e innovacion con Naciones Unidas y la
+                                    Organización Internacional del Trabajo (OIT), diseñando e implementando proyectos en
+                                    distintos paises.</p>
+                                <p class="text-tierra leading-relaxed mb-4">Pero fue al instalarse en un pueblo de
+                                    Extremadura cuando algo encajó. Ahí vio con claridad la distancia entre los grandes
+                                    marcos estratégicos y la realidad cotidiana de los territorios rurales: talento sin
+                                    activar, oportunidades que no llegan, digitalización que no aterriza.</p>
+                                <p class="text-tierra leading-relaxed mb-4">De esa tensión nace En Marcha. Su trabajo
+                                    hoy se centra en conectar experiencia internacional con acción local, convirtiendo
+                                    estrategia en proyectos concretos que puedan sostenerse en el tiempo.</p>
+                                <p class="font-medium text-bosque">En En Marcha aporta vision estructural, experiencia
+                                    en implementación y foco en impacto real.</p>
+                            </div>
+                        </div>
+
+                        <!-- Íñigo Mendizábal -->
+                        <div
+                            class="team-card bg-white rounded-2xl shadow-lg shadow-bosque/5 border border-arena/50 overflow-hidden reveal stagger-2">
+                            <div class="h-48 bg-gradient-to-br from-ocre to-ocre/80 relative">
+                                <img src="assests/img/Mendi - linkedin fondo blanco.jpg" alt="Inigo Mendizabal"
+                                    class="w-full h-full object-cover mix-blend-luminosity opacity-60">
+                                <div class="absolute bottom-4 left-6 right-6">
+                                    <h4 class="font-serif text-xl text-white">Iñigo Mendizábal</h4>
+                                    <p class="text-white/80 text-sm">Diseño estratégico y de experiencia de usuario
+                                        (UX)
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <p class="text-tierra leading-relaxed mb-4">Antes de dedicarse al diseño, trabajó en
+                                    gestión deportiva y de eventos en sitios como Sydney y Nueva York.</p>
+
+                                <p class="text-tierra leading-relaxed mb-4">Experiencias distintas, contextos distintos,
+                                    un aprendizaje común: entender a las personas desde dentro.</p>
+                                <p class="text-tierra leading-relaxed mb-4">Esa mirada práctica y humana es la base de
+                                    su trabajo como disenador UX, con formación en innovacion en La Nave Nodriza. Su
+                                    enfoque se centra en estructurar ideas, simplificar procesos y diseñar soluciones
+                                    que realmente se usan.</p>
+                                <p class="font-medium text-bosque">En En Marcha aporta diseño centrado en las personas,
+                                    prototipado y capacidad para convertir conceptos en experiencias claras y viables.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CÓMO TRABAJAMOS -->
+                <div class="mt-20 bg-arena/30 rounded-2xl p-8 lg:p-12 text-center reveal">
+                    <h3 class="font-serif text-2xl lg:text-3xl text-bosque mb-6">Cómo trabajamos</h3>
+                    <p class="text-tierra text-lg leading-relaxed max-w-3xl mx-auto">
+                        Combinamos estrategia internacional y diseño aplicado. Territorio y metodología. Experiencia y
+                        prototipado.
+                    </p>
+                    <p class="text-bosque font-medium text-lg mt-4">
+                        En Marcha no nace de una teoría. Nace de trayectorias que han pasado por el terreno.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA FINAL -->
+        <section id="contacto"
+            class="py-20 lg:py-28 bg-gradient-to-br from-bosque via-bosque to-oliva relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10">
+                <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <pattern id="ctaPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <circle cx="2" cy="2" r="1" fill="white" />
+                    </pattern>
+                    <rect width="100%" height="100%" fill="url(#ctaPattern)" />
+                </svg>
+            </div>
+
+            <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10 reveal">
+                <h2 class="font-serif text-3xl lg:text-4xl xl:text-5xl text-white mb-6">
+                    Únete a En Marcha
+                </h2>
+                <p class="text-white/80 text-lg lg:text-xl mb-10 max-w-2xl mx-auto">
+                    Juntos podemos construir un futuro más sostenible, inclusivo y conectado. Tu participación marca la
+                    diferencia.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="mailto:contacto@enmarcha.org" class="btn-primary text-lg">
+                        Colabora con En Marcha
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                    <a href="#proyectos"
+                        class="bg-white/10 backdrop-blur text-white border border-white/30 px-7 py-3.5 rounded-xl font-semibold hover:bg-white/20 transition-all">
+                        Ver proyectos
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-arena py-12 lg:py-16">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-10 mb-12">
+                <div class="md:col-span-2">
+                    <a href="#" class="flex items-center gap-3 mb-4">
+                        <img src="assests/img/En marcha logo copy.png" alt="Logo En Marcha" class="h-20 w auto">
+                        <span class="font-serif text-2xl text-bosque">En Marcha</span>
+                    </a>
+                    <p class="text-tierra leading-relaxed max-w-md">
+
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-bosque mb-4">Navegación</h4>
+                    <nav class="flex flex-col gap-2">
+                        <a href="#inicio" class="text-tierra hover:text-oliva transition-colors">Inicio</a>
+                        <a href="#proyectos" class="text-tierra hover:text-oliva transition-colors">Proyectos</a>
+                        <a href="#innovacion" class="text-tierra hover:text-oliva transition-colors">Innovación</a>
+                        <a href="#nosotros" class="text-tierra hover:text-oliva transition-colors">Nosotros</a>
+                    </nav>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-bosque mb-4">Contacto</h4>
+                    <div class="flex flex-col gap-2 text-tierra">
+                        <a href="mailto:contacto@enmarcha.org"
+                            class="hover:text-oliva transition-colors">contacto@enmarcha.org</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-arena pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-tierra text-sm">
+                    2026 En Marcha. Todos los derechos reservados.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" class="text-tierra hover:text-oliva transition-colors text-sm">Política de
+                        privacidad</a>
+                    <a href="#" class="text-tierra hover:text-oliva transition-colors text-sm">Aviso legal</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        const header = document.getElementById('header');
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = mobileMenu ? mobileMenu.querySelectorAll('a') : [];
+        const menuIcon = menuToggle ? menuToggle.querySelector('.menu-icon') : null;
+        const closeIcon = menuToggle ? menuToggle.querySelector('.close-icon') : null;
+
+        let isMenuOpen = false;
+
+        function handleScroll() {
+            if (window.scrollY > 50) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll();
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+
+            if (isMenuOpen) {
+                mobileMenu.classList.add('open');
+                menuIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+                menuToggle.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden';
+            } else {
+                mobileMenu.classList.remove('open');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }
+        }
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', toggleMenu);
+        }
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (isMenuOpen) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && isMenuOpen) {
+                toggleMenu();
+            }
+        });
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (!prefersReducedMotion) {
+            const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            revealElements.forEach(el => {
+                revealObserver.observe(el);
+            });
+        } else {
+            document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+                el.classList.add('visible');
+            });
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    const headerHeight = header.offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+                    });
+                }
+            });
+        });
+
+        if (!prefersReducedMotion) {
+            const heroImage = document.querySelector('.hero-pattern img');
+
+            if (heroImage) {
+                let ticking = false;
+
+                window.addEventListener('scroll', () => {
+                    if (!ticking) {
+                        window.requestAnimationFrame(() => {
+                            const scrolled = window.pageYOffset;
+                            const rate = scrolled * 0.05;
+                            heroImage.style.transform = `translateY(${rate}px)`;
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                });
+            }
+        }
+
+        if (!prefersReducedMotion) {
+            const valueCards = document.querySelectorAll('.value-card');
+
+            valueCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const rotateX = (y - centerY) / 20;
+                    const rotateY = (centerX - x) / 20;
+
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>
