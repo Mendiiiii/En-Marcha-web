@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviso Legal | En Marcha</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bosque': '#2D472C',
+                        'oliva': '#637A3D',
+                        'ocre': '#E9A24B',
+                        'tierra': '#6F5E53',
+                        'arena': '#DDCDB8',
+                    },
+                    fontFamily: {
+                        'serif': ['DM Serif Display', 'serif'],
+                        'sans': ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-white text-tierra">
+
+    <header class="border-b border-arena py-5 px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <img src="assests/img/Logo/En marcha logo copy.png" alt="Logo En Marcha" class="h-12">
+                <span class="font-serif text-xl text-bosque">En Marcha</span>
+            </a>
+            <a href="index.html" class="text-sm text-tierra hover:text-oliva transition-colors">← Volver</a>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+        <h1 class="font-serif text-4xl lg:text-5xl text-bosque mb-4">Aviso Legal</h1>
+        <p class="text-sm text-tierra/60 mb-12">Última actualización: abril de 2026</p>
+
+        <div class="space-y-10">
+
+            <section>
+                <h2 class="font-serif text-2xl text-bosque mb-4">Datos identificativos</h2>
+                <p class="leading-relaxed">En cumplimiento de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se facilitan los siguientes datos:</p>
+                <ul class="mt-4 space-y-2 text-tierra">
+                    <li><span class="font-medium text-bosque">Titular:</span> Miguel Gatoó</li>
+                    <li><span class="font-medium text-bosque">Domicilio:</span> Madrid, España</li>
+                    <li><span class="font-medium text-bosque">Email:</span> <a href="mailto:imendifp@gmail.com" class="text-oliva hover:underline">imendifp@gmail.com</a></li>
+                    <li><span class="font-medium text-bosque">Dominio:</span> <a href="https://en-marcha-web.vercel.app/" target="_blank" class="text-oliva hover:underline">https://en-marcha-web.vercel.app/</a></li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="font-serif text-2xl text-bosque mb-4">Objeto y ámbito de aplicación</h2>
+                <p class="leading-relaxed">El presente aviso legal regula el acceso y uso del sitio web <strong>en-marcha-web.vercel.app</strong>, del que es titular Miguel Gatoó. El acceso y uso de este sitio web implica la aceptación plena de las condiciones recogidas en este aviso legal.</p>
+            </section>
+
+            <section>
+                <h2 class="font-serif text-2xl text-bosque mb-4">Propiedad intelectual</h2>
+                <p class="leading-relaxed">Todos los contenidos del sitio web, incluyendo textos, imágenes y diseño, son propiedad del titular o dispone de los derechos necesarios para su publicación. Queda prohibida su reproducción, distribución o modificación sin autorización expresa.</p>
+            </section>
+
+            <section>
+                <h2 class="font-serif text-2xl text-bosque mb-4">Responsabilidad</h2>
+                <p class="leading-relaxed">El titular no se hace responsable de los daños y perjuicios que pudieran derivarse del uso de la información y contenidos del sitio web. Asimismo, el titular se reserva el derecho a modificar, sin previo aviso, el contenido del sitio web.</p>
+            </section>
+
+            <section>
+                <h2 class="font-serif text-2xl text-bosque mb-4">Legislación aplicable</h2>
+                <p class="leading-relaxed">El presente aviso legal se rige por la legislación española. Para la resolución de cualquier controversia derivada del acceso o uso de este sitio web, las partes se someten a los juzgados y tribunales de Madrid.</p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="border-t border-arena py-8 px-6 lg:px-8 mt-8">
+        <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-tierra text-sm">2026 En Marcha. Todos los derechos reservados.</p>
+            <div class="flex gap-4">
+                <a href="privacidad.html" class="text-tierra hover:text-oliva transition-colors text-sm">Política de privacidad</a>
+                <a href="aviso-legal.html" class="text-tierra hover:text-oliva transition-colors text-sm">Aviso legal</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
